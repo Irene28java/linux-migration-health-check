@@ -1,61 +1,32 @@
-import json
-import subprocess
-import sys
-import tempfile
 import unittest
-from pathlib import Path
-
-SCRIPT = Path(__file__).resolve().parents[1] / "health_check.py"
+from unittest.mock import patch
+import health_check
 
 
 class HealthCheckTests(unittest.TestCase):
+    def test_python_version_is_pass_on_current_runtime(self):
+        result = health_check.check_python()
+        self.assertIn(result["status"], ("PASS", "WARN"))
+        self.assertEqual(result["name"], "Python version")
 
-    def test_generates_valid_json_report(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            result = subprocess.run(
-                [sys.executable, str(SCRIPT)],
-                cwd=tmp,
-                capture_output=True,
-                text=True,
-                timeout=15,
-            )
+    @patch("health_check.shutil.which")
+    def test_missing_required_command_fails(self, mock_which):
+        mock_which.side_effect = lambda command: "/usr/bin/python3" if command == "python3" else None
+        result = health_check.check_required_commands()
+        self.assertEqual(result["status"], "FAIL")
+        self.assertIn("git", result["details"])
 
-            self.assertEqual(result.returncode, 0, result.stderr)
-
-            report_path = Path(tmp) / "report.json"
-            self.assertTrue(report_path.exists())
-
-            report = json.loads(
-                report_path.read_text(encoding="utf-8")
-            )
-            self.assertEqual(
-                report["project"], "Linux Migration Health Check"
-            )
-            self.assertIn("checks", report)
-            self.assertIn("python_version", report["checks"])
-
-    def test_detects_system_tools(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            subprocess.run(
-                [sys.executable, str(SCRIPT)],
-                cwd=tmp,
-                check=True,
-                capture_output=True,
-                text=True,
-                timeout=15,
-            )
-
-            report = json.loads(
-                (Path(tmp) / "report.json").read_text(
-                    encoding="utf-8"
-                )
-            )
-            tools = report["checks"]["tools"]
-            self.assertIn("python3", tools)
-            self.assertIn("git", tools)
-            self.assertTrue(
-                all(isinstance(value, bool) for value in tools.values())
-            )
+    @patch("health_check.shutil.disk_usage")
+    @patch("health_check.Path.resolve")
+    def test_low_disk_space_warns(self, mock_resolve, mock_usage):
+        class Usage:
+            total = 10 * 1024**3
+            used = 9.5 * 1024**3
+            free = 0.5 * 1024**3
+        mock_usage.return_value = Usage()
+        mock_resolve.return_value = "/fake"
+        result = health_check.check_disk()
+        self.assertEqual(result["status"], "WARN")
 
 
 if __name__ == "__main__":
