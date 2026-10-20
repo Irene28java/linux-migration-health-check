@@ -20,8 +20,8 @@ REQUIRED_FIELDS = (
 VALID_TYPES = {"camera", "radar", "communications"}
 
 
-def load_inventory(config_path: Path) -> list[dict[str, str]]:
-    """Load the inventory and validate its contents."""
+def load_inventory(config_path: Path) -> list[dict]:
+    """Load the inventory and validate device configuration."""
     try:
         content = config_path.read_text(encoding="utf-8")
     except OSError as exc:
@@ -46,9 +46,9 @@ def load_inventory(config_path: Path) -> list[dict[str, str]]:
     if not isinstance(devices, list) or not devices:
         raise ValueError("'devices' must be a non-empty list.")
 
-    validated_devices: list[dict[str, str]] = []
-    seen_ids: set[str] = set()
-    seen_ips: set[str] = set()
+    validated_devices = []
+    seen_ids = set()
+    seen_ips = set()
 
     for number, device in enumerate(devices, start=1):
         if not isinstance(device, dict):
@@ -85,6 +85,52 @@ def load_inventory(config_path: Path) -> list[dict[str, str]]:
         if normalized_ip in seen_ips:
             raise ValueError(f"Duplicate IP address: '{ip_address}'.")
 
+        # Validate the configured TCP ports.
+        ports = device.get("ports_to_check", [])
+        if not isinstance(ports, list):
+            raise ValueError(
+                f"Device '{device_id}': ports_to_check must be a list."
+            )
+
+        validated_ports = []
+        seen_ports = set()
+
+        for port_config in ports:
+            if not isinstance(port_config, dict):
+                raise ValueError(
+                    f"Device '{device_id}': each port entry must "
+                    "be an object."
+                )
+
+            port = port_config.get("port")
+            service = port_config.get("service")
+
+            if (
+                isinstance(port, bool)
+                or not isinstance(port, int)
+                or not 1 <= port <= 65535
+            ):
+                raise ValueError(
+                    f"Device '{device_id}': invalid port '{port}'. "
+                    "Use an integer between 1 and 65535."
+                )
+
+            if not isinstance(service, str) or not service.strip():
+                raise ValueError(
+                    f"Device '{device_id}': each port needs a "
+                    "service name."
+                )
+
+            if port in seen_ports:
+                raise ValueError(
+                    f"Device '{device_id}': duplicate port {port}."
+                )
+
+            seen_ports.add(port)
+            validated_ports.append(
+                {"port": port, "service": service.strip()}
+            )
+
         seen_ids.add(device_id)
         seen_ips.add(normalized_ip)
 
@@ -92,6 +138,10 @@ def load_inventory(config_path: Path) -> list[dict[str, str]]:
             field: device[field].strip()
             for field in REQUIRED_FIELDS
         }
+        validated_device["id"] = device_id
+        validated_device["type"] = device_type
+        validated_device["ip_address"] = normalized_ip
+        validated_device["ports_to_check"] = validated_ports
 
         if "description" in device:
             description = device["description"]
@@ -101,15 +151,12 @@ def load_inventory(config_path: Path) -> list[dict[str, str]]:
                 )
             validated_device["description"] = description.strip()
 
-        validated_device["type"] = device_type
-        validated_device["ip_address"] = normalized_ip
-
         validated_devices.append(validated_device)
 
     return validated_devices
 
 
-def display_inventory(devices: list[dict[str, str]]) -> None:
+def display_inventory(devices: list[dict]) -> None:
     """Display the inventory in a readable terminal table."""
     print("\nDEVICE INVENTORY")
     print("=" * 105)
@@ -127,6 +174,10 @@ def display_inventory(devices: list[dict[str, str]]) -> None:
             f"{device['location']:<22} "
             f"{device['name']}"
         )
+        for item in device["ports_to_check"]:
+            print(
+                f"    TCP port {item['port']}: {item['service']}"
+            )
 
     print("-" * 105)
     print(f"Total devices: {len(devices)}")
@@ -156,5 +207,4 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())	
-
+    raise SystemExit(main())

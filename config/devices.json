@@ -9,6 +9,11 @@
       "manufacturer": "Axis",
       "model": "Q1656-LE",
       "location": "Acceso norte",
+      "ports_to_check": [
+        {"port": 80, "service": "HTTP"},
+        {"port": 443, "service": "HTTPS"},
+        {"port": 554, "service": "RTSP"}
+      ],
       "description": "Equipo de ejemplo; no representa una camara conectada."
     },
     {
@@ -19,6 +24,9 @@
       "manufacturer": "Fabricante simulado",
       "model": "RADAR-DEMO-01",
       "location": "Zona de pruebas",
+      "ports_to_check": [
+        {"port": 443, "service": "HTTPS"}
+      ],
       "description": "Dispositivo ficticio para practicar la integracion de sistemas."
     },
     {
@@ -29,6 +37,10 @@
       "manufacturer": "Fabricante simulado",
       "model": "NET-DEMO-01",
       "location": "Armario de red A",
+      "ports_to_check": [
+        {"port": 22, "service": "SSH"},
+        {"port": 443, "service": "HTTPS"}
+      ],
       "description": "Equipo ficticio de comunicaciones."
     }
   ]
