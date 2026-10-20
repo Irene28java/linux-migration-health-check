@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "devices": [
+    {
+      "id": "CAM-001",
+      "name": "Camara exterior de demostracion",
+      "type": "camera",
+      "ip_address": "192.0.2.10",
+      "manufacturer": "Axis",
+      "model": "Q1656-LE",
+      "location": "Acceso norte",
+      "description": "Equipo de ejemplo; no representa una camara conectada."
+    },
+    {
+      "id": "RAD-001",
+      "name": "Radar de demostracion",
+      "type": "radar",
+      "ip_address": "192.0.2.20",
+      "manufacturer": "Fabricante simulado",
+      "model": "RADAR-DEMO-01",
+      "location": "Zona de pruebas",
+      "description": "Dispositivo ficticio para practicar la integracion de sistemas."
+    },
+    {
+      "id": "COM-001",
+      "name": "Equipo de comunicaciones",
+      "type": "communications",
+      "ip_address": "192.0.2.30",
+      "manufacturer": "Fabricante simulado",
+      "model": "NET-DEMO-01",
+      "location": "Armario de red A",
+      "description": "Equipo ficticio de comunicaciones."
+    }
+  ]
+}
