@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IP Device Health Dashboard</title>
+<style>
+:root {
+  color-scheme: light;
+  --navy: #142238;
+  --muted: #64748b;
+  --line: #e2e8f0;
+  --green: #166534;
+  --green-bg: #dcfce7;
+  --amber: #92400e;
+  --amber-bg: #fef3c7;
+  --red: #991b1b;
+  --red-bg: #fee2e2;
+  --blue: #334155;
+  --blue-bg: #e2e8f0;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: #f1f5f9;
+  color: #1e293b;
+  font-family: Arial, Helvetica, sans-serif;
+}
+header {
+  background: var(--navy);
+  color: white;
+  padding: 28px 5%;
+}
+header h1 { margin: 0 0 8px; font-size: 28px; }
+header p { margin: 5px 0; color: #cbd5e1; }
+main { max-width: 1450px; margin: 28px auto; padding: 0 20px; }
+.notice {
+  padding: 14px 18px;
+  border-radius: 10px;
+  background: #e0f2fe;
+  border-left: 5px solid #0284c7;
+  margin-bottom: 22px;
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px;
+  margin-bottom: 24px;
+}
+.card, .panel {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px;
+}
+.card h2 { font-size: 13px; color: var(--muted); margin: 0 0 10px; }
+.metric { font-size: 30px; font-weight: 700; }
+.panel { margin-bottom: 24px; }
+.panel h2 { margin: 0 0 16px; font-size: 19px; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th, td {
+  text-align: left;
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+th { background: #f8fafc; color: #475569; }
+.badge {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 5px 9px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.ok, .open { color: var(--green); background: var(--green-bg); }
+.warning, .timeout { color: var(--amber); background: var(--amber-bg); }
+.critical, .closed, .unreachable { color: var(--red); background: var(--red-bg); }
+.info, .not_run { color: var(--blue); background: var(--blue-bg); }
+footer { color: var(--muted); font-size: 12px; padding: 10px 0 28px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>IP Device Health Dashboard</h1>
+  <p>Linux · Network diagnostics · Systems integration</p>
+  <p>Generated at (UTC): 2026-10-20T15:21:18.801063+00:00</p>
+  <p>Overall status: <span class="badge not_run">NOT_RUN</span></p>
+</header>
+<main>
+  <div class="notice">DRY RUN — no network connections were attempted.</div>
+  <section class="cards">
+    <div class="card"><h2>Total checks</h2><div class="metric">6</div></div>
+    <div class="card"><h2>OK</h2><div class="metric" style="color:#166534">0</div></div>
+    <div class="card"><h2>Warnings</h2><div class="metric" style="color:#b45309">0</div></div>
+    <div class="card"><h2>Critical</h2><div class="metric" style="color:#b91c1c">0</div></div>
+    <div class="card"><h2>Not run</h2><div class="metric">6</div></div>
+  </section>
+  <section class="panel">
+    <h2>Device and port results</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th>ID</th><th>Device</th><th>Target</th><th>Service</th>
+          <th>Severity</th><th>Status</th><th>Latency</th><th>Details</th>
+        </tr></thead>
+        <tbody><tr><td>CAM-001</td><td>Camara exterior de demostracion</td><td>192.0.2.10:80</td><td>HTTP</td><td><span class='badge info'>INFO</span></td><td>NOT_RUN</td><td>—</td><td>Dry run; no network connection attempted</td></tr>
+<tr><td>CAM-001</td><td>Camara exterior de demostracion</td><td>192.0.2.10:443</td><td>HTTPS</td><td><span class='badge info'>INFO</span></td><td>NOT_RUN</td><td>—</td><td>Dry run; no network connection attempted</td></tr>
+<tr><td>CAM-001</td><td>Camara exterior de demostracion</td><td>192.0.2.10:554</td><td>RTSP</td><td><span class='badge info'>INFO</span></td><td>NOT_RUN</td><td>—</td><td>Dry run; no network connection attempted</td></tr>
+<tr><td>RAD-001</td><td>Radar de demostracion</td><td>192.0.2.20:443</td><td>HTTPS</td><td><span class='badge info'>INFO</span></td><td>NOT_RUN</td><td>—</td><td>Dry run; no network connection attempted</td></tr>
+<tr><td>COM-001</td><td>Equipo de comunicaciones</td><td>192.0.2.30:22</td><td>SSH</td><td><span class='badge info'>INFO</span></td><td>NOT_RUN</td><td>—</td><td>Dry run; no network connection attempted</td></tr>
+<tr><td>COM-001</td><td>Equipo de comunicaciones</td><td>192.0.2.30:443</td><td>HTTPS</td><td><span class='badge info'>INFO</span></td><td>NOT_RUN</td><td>—</td><td>Dry run; no network connection attempted</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+  <footer>
+    TCP connectivity alone does not confirm that an application, camera stream,
+    or radar function is operating correctly.
+  </footer>
+</main>
+</body>
+</html>
