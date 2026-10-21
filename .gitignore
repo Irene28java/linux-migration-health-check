@@ -8,3 +8,5 @@ report.json
 connectivity_report.json
 
 /reports/
+
+.env

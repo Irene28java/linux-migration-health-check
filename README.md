@@ -70,3 +70,35 @@ GitHub Actions runs the tests on pushes and pull requests.
 - HTML diagnostic report with status indicators.
 - Additional application-level checks.
 - Expanded technical documentation.
+
+## RabbitMQ event messaging
+
+The project includes a local RabbitMQ messaging demo using Docker,
+Python, Pika, and JSON events.
+
+### Start RabbitMQ
+
+Create a local `.env` file with your own development credentials.
+Use `.env.example` as a template. Do not commit `.env`.
+
+Start the service:
+
+    docker compose up -d
+
+Install Python dependencies in a virtual environment:
+
+    python3 -m venv .venv
+    source .venv/bin/activate
+    python -m pip install -r requirements.txt
+
+Publish a simulated device event:
+
+    python event_producer.py
+
+Consume events from another terminal:
+
+    python event_consumer.py
+
+RabbitMQ management UI: http://localhost:15672
+
+The events are simulated. No real cameras or radar devices are contacted.
