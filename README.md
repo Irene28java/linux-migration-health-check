@@ -33,7 +33,7 @@ configuration validation, automated testing, and continuous integration.
 ## Requirements
 
 - Python 3.10 or newer.
-- No third-party Python dependencies.
+RabbitMQ dependencies are listed in requirements.txt (Pika and python-dotenv).
 
 ## Getting started
 
@@ -67,7 +67,7 @@ GitHub Actions runs the tests on pushes and pull requests.
 
 ## Future improvements
 
-- HTML diagnostic report with status indicators.
+- Application-level checks for supported camera and radar protocols.
 - Additional application-level checks.
 - Expanded technical documentation.
 
