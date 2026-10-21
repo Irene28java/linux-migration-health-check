@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-10-21T05:36:07.091856+00:00",
+  "mode": "demo",
+  "overall_status": "CRITICAL",
+  "summary": {
+    "total_checks": 6,
+    "ok": 3,
+    "warning": 1,
+    "critical": 2,
+    "not_run": 0
+  },
+  "results": [
+    {
+      "device_id": "CAM-001",
+      "device_name": "Camara exterior de demostracion",
+      "device_type": "camera",
+      "ip_address": "192.0.2.10",
+      "port": 80,
+      "service": "HTTP",
+      "status": "OPEN",
+      "severity": "OK",
+      "latency_ms": 14.2,
+      "detail": "Demo: TCP connection succeeded"
+    },
+    {
+      "device_id": "CAM-001",
+      "device_name": "Camara exterior de demostracion",
+      "device_type": "camera",
+      "ip_address": "192.0.2.10",
+      "port": 443,
+      "service": "HTTPS",
+      "status": "TIMEOUT",
+      "severity": "WARNING",
+      "latency_ms": 1000.0,
+      "detail": "Demo: connection timed out"
+    },
+    {
+      "device_id": "CAM-001",
+      "device_name": "Camara exterior de demostracion",
+      "device_type": "camera",
+      "ip_address": "192.0.2.10",
+      "port": 554,
+      "service": "RTSP",
+      "status": "CLOSED",
+      "severity": "CRITICAL",
+      "latency_ms": 6.5,
+      "detail": "Demo: connection refused"
+    },
+    {
+      "device_id": "RAD-001",
+      "device_name": "Radar de demostracion",
+      "device_type": "radar",
+      "ip_address": "192.0.2.20",
+      "port": 443,
+      "service": "HTTPS",
+      "status": "OPEN",
+      "severity": "OK",
+      "latency_ms": 19.8,
+      "detail": "Demo: TCP connection succeeded"
+    },
+    {
+      "device_id": "COM-001",
+      "device_name": "Equipo de comunicaciones",
+      "device_type": "communications",
+      "ip_address": "192.0.2.30",
+      "port": 22,
+      "service": "SSH",
+      "status": "CLOSED",
+      "severity": "CRITICAL",
+      "latency_ms": 3.1,
+      "detail": "Demo: connection refused"
+    },
+    {
+      "device_id": "COM-001",
+      "device_name": "Equipo de comunicaciones",
+      "device_type": "communications",
+      "ip_address": "192.0.2.30",
+      "port": 443,
+      "service": "HTTPS",
+      "status": "OPEN",
+      "severity": "OK",
+      "latency_ms": 15.4,
+      "detail": "Demo: TCP connection succeeded"
+    }
+  ]
+}

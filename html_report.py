@@ -85,12 +85,17 @@ def main():
         rows.append("<tr><td colspan='8'>No results available.</td></tr>")
 
     mode = report.get("mode", "unknown")
-    dry_run = mode == "dry-run"
-    mode_note = (
-        "DRY RUN — no network connections were attempted."
-        if dry_run
-        else "LIVE MODE — results reflect attempted TCP connections."
-    )
+
+    if mode == "dry-run":
+        mode_note = "DRY RUN — no network connections were attempted."
+    elif mode == "demo":
+        mode_note = (
+            "DEMO DATA — simulated results only; "
+            "no network checks were performed."
+        )
+    else:
+        mode_note = "LIVE MODE — results reflect attempted TCP connections."	
+
 
     template = """<!doctype html>
 <html lang="en">

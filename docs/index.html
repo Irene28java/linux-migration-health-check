@@ -85,17 +85,17 @@ footer { color: var(--muted); font-size: 12px; padding: 10px 0 28px; }
 <header>
   <h1>IP Device Health Dashboard</h1>
   <p>Linux · Network diagnostics · Systems integration</p>
-  <p>Generated at (UTC): 2026-10-20T15:21:18.801063+00:00</p>
-  <p>Overall status: <span class="badge not_run">NOT_RUN</span></p>
+  <p>Generated at (UTC): 2026-10-21T05:36:07.091856+00:00</p>
+  <p>Overall status: <span class="badge critical">CRITICAL</span></p>
 </header>
 <main>
-  <div class="notice">DRY RUN — no network connections were attempted.</div>
+  <div class="notice">DEMO DATA — simulated results only; no network checks were performed.</div>
   <section class="cards">
     <div class="card"><h2>Total checks</h2><div class="metric">6</div></div>
-    <div class="card"><h2>OK</h2><div class="metric" style="color:#166534">0</div></div>
-    <div class="card"><h2>Warnings</h2><div class="metric" style="color:#b45309">0</div></div>
-    <div class="card"><h2>Critical</h2><div class="metric" style="color:#b91c1c">0</div></div>
-    <div class="card"><h2>Not run</h2><div class="metric">6</div></div>
+    <div class="card"><h2>OK</h2><div class="metric" style="color:#166534">3</div></div>
+    <div class="card"><h2>Warnings</h2><div class="metric" style="color:#b45309">1</div></div>
+    <div class="card"><h2>Critical</h2><div class="metric" style="color:#b91c1c">2</div></div>
+    <div class="card"><h2>Not run</h2><div class="metric">0</div></div>
   </section>
   <section class="panel">
     <h2>Device and port results</h2>
@@ -105,12 +105,12 @@ footer { color: var(--muted); font-size: 12px; padding: 10px 0 28px; }
           <th>ID</th><th>Device</th><th>Target</th><th>Service</th>
           <th>Severity</th><th>Status</th><th>Latency</th><th>Details</th>
         </tr></thead>
-        <tbody><tr><td>CAM-001</td><td>Camara exterior de demostracion</td><td>192.0.2.10:80</td><td>HTTP</td><td><span class='badge info'>INFO</span></td><td>NOT_RUN</td><td>—</td><td>Dry run; no network connection attempted</td></tr>
-<tr><td>CAM-001</td><td>Camara exterior de demostracion</td><td>192.0.2.10:443</td><td>HTTPS</td><td><span class='badge info'>INFO</span></td><td>NOT_RUN</td><td>—</td><td>Dry run; no network connection attempted</td></tr>
-<tr><td>CAM-001</td><td>Camara exterior de demostracion</td><td>192.0.2.10:554</td><td>RTSP</td><td><span class='badge info'>INFO</span></td><td>NOT_RUN</td><td>—</td><td>Dry run; no network connection attempted</td></tr>
-<tr><td>RAD-001</td><td>Radar de demostracion</td><td>192.0.2.20:443</td><td>HTTPS</td><td><span class='badge info'>INFO</span></td><td>NOT_RUN</td><td>—</td><td>Dry run; no network connection attempted</td></tr>
-<tr><td>COM-001</td><td>Equipo de comunicaciones</td><td>192.0.2.30:22</td><td>SSH</td><td><span class='badge info'>INFO</span></td><td>NOT_RUN</td><td>—</td><td>Dry run; no network connection attempted</td></tr>
-<tr><td>COM-001</td><td>Equipo de comunicaciones</td><td>192.0.2.30:443</td><td>HTTPS</td><td><span class='badge info'>INFO</span></td><td>NOT_RUN</td><td>—</td><td>Dry run; no network connection attempted</td></tr></tbody>
+        <tbody><tr><td>CAM-001</td><td>Camara exterior de demostracion</td><td>192.0.2.10:80</td><td>HTTP</td><td><span class='badge ok'>OK</span></td><td>OPEN</td><td>14.2 ms</td><td>Demo: TCP connection succeeded</td></tr>
+<tr><td>CAM-001</td><td>Camara exterior de demostracion</td><td>192.0.2.10:443</td><td>HTTPS</td><td><span class='badge warning'>WARNING</span></td><td>TIMEOUT</td><td>1000.0 ms</td><td>Demo: connection timed out</td></tr>
+<tr><td>CAM-001</td><td>Camara exterior de demostracion</td><td>192.0.2.10:554</td><td>RTSP</td><td><span class='badge critical'>CRITICAL</span></td><td>CLOSED</td><td>6.5 ms</td><td>Demo: connection refused</td></tr>
+<tr><td>RAD-001</td><td>Radar de demostracion</td><td>192.0.2.20:443</td><td>HTTPS</td><td><span class='badge ok'>OK</span></td><td>OPEN</td><td>19.8 ms</td><td>Demo: TCP connection succeeded</td></tr>
+<tr><td>COM-001</td><td>Equipo de comunicaciones</td><td>192.0.2.30:22</td><td>SSH</td><td><span class='badge critical'>CRITICAL</span></td><td>CLOSED</td><td>3.1 ms</td><td>Demo: connection refused</td></tr>
+<tr><td>COM-001</td><td>Equipo de comunicaciones</td><td>192.0.2.30:443</td><td>HTTPS</td><td><span class='badge ok'>OK</span></td><td>OPEN</td><td>15.4 ms</td><td>Demo: TCP connection succeeded</td></tr></tbody>
       </table>
     </div>
   </section>
